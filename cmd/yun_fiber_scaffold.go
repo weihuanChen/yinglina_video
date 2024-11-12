@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"yunosphere.com/yun-fiber-scaffold/pkg/router"
 )
 
 func Start() {
@@ -72,15 +73,7 @@ func runApp(cfg fiber.Config) {
 
 // setupRoutes 设置路由
 func setupRoutes(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, Fiber 🎉!\n")
-	})
-
-	// 添加一个测试耗时连接的路由
-	app.Get("/long", func(c *fiber.Ctx) error {
-		time.Sleep(20 * time.Second) // 模拟长时间处理的请求
-		return c.SendString("耗时请求处理完成 !\n")
-	})
+	router.YunRouter(app)
 }
 
 // gracefulShutdown 处理优雅关闭应用
