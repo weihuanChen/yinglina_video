@@ -9,25 +9,28 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"yunosphere.com/yun-fiber-scaffold/configs"
 	"yunosphere.com/yun-fiber-scaffold/pkg/router"
 )
 
 func Start() {
-	// 创建配置
-	initConfig := fiber.Config{
-		AppName: "yun-fiber-scaffold",
-		// 添加一些优雅关闭相关的配置，确保资源能及时释放
-		IdleTimeout:  time.Second * 5,
-		ReadTimeout:  time.Second * 5,
-		WriteTimeout: time.Second * 5,
-	}
+	// 初始化配置
+	configs.InitCfg()
 	// 启动应用
-	runApp(initConfig)
+	runApp()
 }
 
-func runApp(cfg fiber.Config) {
+func runApp() {
+	// 创建配置
+	initConfig := fiber.Config{
+		AppName: configs.Cfg.App.Name,
+		// 添加一些优雅关闭相关的配置，确保资源能及时释放
+		IdleTimeout:  time.Second * time.Duration(configs.Cfg.App.IdleTimeOut),
+		ReadTimeout:  time.Second * time.Duration(configs.Cfg.App.ReadTimeOut),
+		WriteTimeout: time.Second * time.Duration(configs.Cfg.App.WriteTimeOut),
+	}
 	// 初始化 app
-	app := fiber.New(cfg)
+	app := fiber.New(initConfig)
 
 	// 设置路由
 	setupRoutes(app)

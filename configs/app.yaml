@@ -1,0 +1,9 @@
+app:
+  version: v1.0.0
+  name: yun-fiber-scaffold
+  idle_time_out: 5
+  read_time_out: 5
+  write_time_out: 5
+  port: 8080
+  env: debug
+  desc: Fiber脚手架
