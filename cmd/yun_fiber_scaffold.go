@@ -4,12 +4,14 @@ import (
 	"context"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 	"yunosphere.com/yun-fiber-scaffold/configs"
+	"yunosphere.com/yun-fiber-scaffold/internal/logger"
 	"yunosphere.com/yun-fiber-scaffold/pkg/router"
 )
 
@@ -31,6 +33,11 @@ func runApp() {
 	}
 	// 初始化 app
 	app := fiber.New(initConfig)
+
+	// 初始化请求 ID
+	app.Use(requestid.New())
+	// 初始化日志库
+	app.Use(logger.New())
 
 	// 设置路由
 	setupRoutes(app)

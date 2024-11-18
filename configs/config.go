@@ -22,8 +22,18 @@ type app struct {
 	CfgFile      string `mapstructure:"-" ignore:"true"` // 记录实际使用了哪个配置文件, 这是运行时配置, 不从 YAML 加载; 且忽略变更时类型检查
 }
 
+type logger struct {
+	LogFilePath     string `mapstructure:"logFilePath"`
+	LogFileName     string `mapstructure:"logFileName"`
+	LogTimestampFmt string `mapstructure:"logTimestampFmt"`
+	LogMaxAge       int    `mapstructure:"logMaxAge"`
+	LogRotationTime int    `mapstructure:"logRotationTime"`
+	LogLevel        string `mapstructure:"logLevel"`
+}
+
 type AppConfig struct {
-	App app `mapstructure:"app"`
+	App    app    `mapstructure:"app"`
+	Logger logger `mapstructure:"logger"`
 }
 
 // CfgPath 配置文件路径

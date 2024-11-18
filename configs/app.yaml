@@ -7,3 +7,13 @@ app:
   port: 8080
   env: debug
   desc: Fiber脚手架
+logger:
+  logFilePath: .logs/
+  logFileName: app.log
+  # Go 中的时间格式化使用特定的参考时间作为模板
+  logTimestampFmt: "2006-01-02 15:04:05"
+  # 文件的最大保存时间: 我们日志文件最大保留 3 天 (3 * 24 H)
+  logMaxAge: 72
+  # 日志轮转频率: 每 24 小时轮转一次
+  logRotationTime: 24
+  logLevel: INFO
