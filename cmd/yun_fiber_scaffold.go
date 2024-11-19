@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 	"yunosphere.com/yun-fiber-scaffold/configs"
+	"yunosphere.com/yun-fiber-scaffold/internal/db"
 	"yunosphere.com/yun-fiber-scaffold/internal/logger"
 	"yunosphere.com/yun-fiber-scaffold/pkg/router"
 )
@@ -38,6 +39,9 @@ func runApp() {
 	app.Use(requestid.New())
 	// 初始化日志库
 	app.Use(logger.New())
+
+	// 初始化数据库
+	db.New()
 
 	// 设置路由
 	setupRoutes(app)

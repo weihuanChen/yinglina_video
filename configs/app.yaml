@@ -17,3 +17,9 @@ logger:
   # 日志轮转频率: 每 24 小时轮转一次
   logRotationTime: 24
   logLevel: INFO
+db:
+  name: yun_fiber_scaffold_db
+  host: 127.0.0.1
+  port: 5432
+  user: postgres
+  psw: yun@123456
