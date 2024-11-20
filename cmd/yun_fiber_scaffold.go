@@ -43,6 +43,9 @@ func runApp() {
 	// 初始化数据库
 	db.New()
 
+	// 数据库自动迁移
+	db.AutoMigrate()
+
 	// 设置路由
 	setupRoutes(app)
 
