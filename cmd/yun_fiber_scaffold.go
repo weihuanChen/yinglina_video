@@ -13,6 +13,7 @@ import (
 	"yunosphere.com/yun-fiber-scaffold/configs"
 	"yunosphere.com/yun-fiber-scaffold/internal/db"
 	"yunosphere.com/yun-fiber-scaffold/internal/logger"
+	"yunosphere.com/yun-fiber-scaffold/internal/redis"
 	"yunosphere.com/yun-fiber-scaffold/pkg/router"
 )
 
@@ -45,6 +46,9 @@ func runApp() {
 
 	// 数据库自动迁移
 	db.AutoMigrate()
+
+	// 初始化 Redis 连接池
+	redis.New()
 
 	// 设置路由
 	setupRoutes(app)

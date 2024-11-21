@@ -39,10 +39,18 @@ type db struct {
 	Psw  string `mapstructure:"psw"`
 }
 
+type redis struct {
+	Host string `yaml:"host"`
+	Port string `yaml:"port"`
+	Db   string `yaml:"db"`
+	Psw  string `yaml:"psw"`
+}
+
 type AppConfig struct {
 	App    app    `mapstructure:"app"`
 	Logger logger `mapstructure:"logger"`
 	Db     db     `mapstructure:"db"`
+	Redis  redis  `mapstructure:"redis"`
 }
 
 // CfgPath 配置文件路径

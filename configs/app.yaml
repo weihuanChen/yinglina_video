@@ -23,3 +23,8 @@ db:
   port: 5432
   user: postgres
   psw: yun@123456
+redis:
+  host: 127.0.0.1
+  port: 6379
+  db: 0
+  psw:

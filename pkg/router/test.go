@@ -13,6 +13,7 @@ func testRouter(r ...fiber.Router) {
 	testGroupV1.Get("/ping", test.Ping)
 	testGroupV1.Get("/hello", test.Hello)
 	testGroupV1.Get("/testLogger", test.TestLogger)
+	testGroupV1.Get("/testRedis", test.TestRedis)
 
 	// api v2 group
 	apiV2 := r[1]

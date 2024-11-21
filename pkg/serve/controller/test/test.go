@@ -3,6 +3,7 @@ package test
 import (
 	"github.com/gofiber/fiber/v2"
 	"time"
+	"yunosphere.com/yun-fiber-scaffold/internal/global"
 	"yunosphere.com/yun-fiber-scaffold/internal/utils"
 )
 
@@ -22,4 +23,27 @@ func LongReq(c *fiber.Ctx) error {
 func TestLogger(c *fiber.Ctx) error {
 	utils.BizLogger(c).Infof("TestLogger...")
 	return c.SendString("测试日志成功!")
+}
+
+func TestRedis(c *fiber.Ctx) error {
+	utils.BizLogger(c).Infof("开始写入缓存...")
+	// 初始化缓存连接
+	conn := global.RedisPool.Get()
+	defer conn.Close()
+	_, err := conn.Do("SET", "TEST:", "测试 value")
+	if err != nil {
+		utils.BizLogger(c).Errorf("测试写入缓存失败: %v", err)
+		return err
+	}
+	utils.BizLogger(c).Infof("写入缓存成功...")
+
+	utils.BizLogger(c).Infof("开始读取缓存...")
+	// 这里可以复用 conn 打开的连接
+	articlesCache, err := conn.Do("GET", "TEST:")
+	if err != nil {
+		utils.BizLogger(c).Errorf("测试读取缓存失败: %v", err)
+		return err
+	}
+	utils.BizLogger(c).Infof("读取缓存成功, key: %s , value: %s", "TEST:", articlesCache)
+	return c.SendString("测试缓存功能完成!")
 }
