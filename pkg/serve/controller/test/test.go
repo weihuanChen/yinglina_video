@@ -3,8 +3,10 @@ package test
 import (
 	"github.com/gofiber/fiber/v2"
 	"time"
+	"yunosphere.com/yun-fiber-scaffold/internal/error"
 	"yunosphere.com/yun-fiber-scaffold/internal/global"
 	"yunosphere.com/yun-fiber-scaffold/internal/utils"
+	"yunosphere.com/yun-fiber-scaffold/pkg/vo"
 )
 
 func Ping(c *fiber.Ctx) error {
@@ -46,4 +48,12 @@ func TestRedis(c *fiber.Ctx) error {
 	}
 	utils.BizLogger(c).Infof("读取缓存成功, key: %s , value: %s", "TEST:", articlesCache)
 	return c.SendString("测试缓存功能完成!")
+}
+
+func TestSuccRes(c *fiber.Ctx) error {
+	return c.JSON(vo.Success(nil, c))
+}
+
+func TestErrRes(c *fiber.Ctx) error {
+	return c.JSON(vo.Fail(biz_err.New(biz_err.ServerError), nil, c))
 }
