@@ -16,6 +16,7 @@ func testRouter(r ...fiber.Router) {
 	testGroupV1.Get("/testRedis", test.TestRedis)
 	testGroupV1.Get("/testSuccess", test.TestSuccRes)
 	testGroupV1.Get("/testErr", test.TestErrRes)
+	testGroupV1.Get("/testErrorMiddleware", test.TestErrorMiddleware)
 
 	// api v2 group
 	apiV2 := r[1]

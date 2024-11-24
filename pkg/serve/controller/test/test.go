@@ -57,3 +57,8 @@ func TestSuccRes(c *fiber.Ctx) error {
 func TestErrRes(c *fiber.Ctx) error {
 	return c.JSON(vo.Fail(biz_err.New(biz_err.ServerError), nil, c))
 }
+
+func TestErrorMiddleware(c *fiber.Ctx) error {
+	// 模拟业务异常
+	panic("发生业务异常")
+}
