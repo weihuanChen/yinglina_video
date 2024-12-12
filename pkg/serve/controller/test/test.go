@@ -10,7 +10,7 @@ import (
 )
 
 func Ping(c *fiber.Ctx) error {
-	return c.SendString("Pong!\n")
+	return c.SendString("Hello go!\n")
 }
 
 func Hello(c *fiber.Ctx) error {
